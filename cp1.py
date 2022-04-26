@@ -50,10 +50,9 @@ def splash():
 		res=requests.get(url)
 		soup=bs4.BeautifulSoup(res.text,'html.parser') #html parser cause its lit
 		quote=str(soup.find("a",{"class":"oncl_q"}))
-		print(quote)
-		print(quote.find("data-img-url"))
-		mid=quote.find("data-img-url")+14 #+14 cause we dont want  ' data-img-url:" ' to pop up as well
-		print(quote.find(".jpg"))
+		
+		mid=quote.find("src")+5 #+14 cause we dont want  ' data-img-url:" ' to pop up as well
+	
 		val=mid+quote[mid:].find(".jpg")+4 #+4 cause we want to inlclude .jpg as well in the string
 		final='https://www.brainyquote.com'+str(quote[mid:val]) #using the string manipulation to get the desired o/p
 		r=requests.get(final) #fetches image
@@ -68,7 +67,7 @@ def splash():
 
 		hi=Toplevel(login)
 		#hi.pack()
-		image1 = Image.open("C://Users/bhavy/Documents/image1.jpg")
+		image1 = Image.open("./image1.jpg")
 		photo_image = ImageTk.PhotoImage(image1) #usingTk photo image to size as image
 		label = tk.Label(hi, image = photo_image) 
 		label.pack()
@@ -367,7 +366,7 @@ def f12():
                 for r in row:
                         plt.bar(r[1],r[2],width=0.5)
                 plt.title('Exam score',fontsize=20)
-                plt.legend(loc="upper right",shadow=True0)
+                plt.legend(loc="upper right",shadow=True)
                 plt.xlabel('Subjects',fontsize=15)
                 plt.ylabel('Marks',fontsize=15)
                 plt.show()
